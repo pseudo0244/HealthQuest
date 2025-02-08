@@ -6,6 +6,7 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import GameScreen from "./src/screens/GameScreen";
 import VoiceScreen from "./src/screens/VoiceScreen";
 import LiveNewsScreen from "./src/screens/LiveNewsScreen";
+import LevelScreen from "./src/screens/LevelScreen"; // Add this new screen
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,16 @@ export default function App() {
         <Stack.Screen name="Game" component={GameScreen} />
         <Stack.Screen name="Voice" component={VoiceScreen} />
         <Stack.Screen name="LiveNews" component={LiveNewsScreen} />
+        
+        {/* Dynamically create 100 level screens */}
+        {Array.from({ length: 100 }).map((_, index) => (
+          <Stack.Screen
+            key={`level-${index + 1}`}
+            name={`Level${index + 1}`}
+            component={LevelScreen}
+            initialParams={{ level: index + 1 }}
+          />
+        ))}
       </Stack.Navigator>
     </NavigationContainer>
   );
