@@ -1,29 +1,29 @@
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Dimensions, Animated } from "react-native"
-import { useNavigation } from "@react-navigation/native"
-import { LinearGradient } from "expo-linear-gradient"
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, Dimensions, Animated } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function GameScreen() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   // Create an array of 100 levels
-  const levels = Array.from({ length: 100 }, (_, index) => index + 1)
+  const levels = Array.from({ length: 100 }, (_, index) => index + 1);
 
   const renderItem = ({ item }) => {
-    const animatedValue = new Animated.Value(0)
+    const animatedValue = new Animated.Value(0);
 
     const animateButton = () => {
       Animated.sequence([
         Animated.timing(animatedValue, { toValue: 1, duration: 200, useNativeDriver: true }),
         Animated.timing(animatedValue, { toValue: 0, duration: 200, useNativeDriver: true }),
-      ]).start()
-    }
+      ]).start();
+    };
 
     return (
       <TouchableOpacity
         style={styles.buttonContainer}
         onPress={() => {
-          animateButton()
-          setTimeout(() => navigation.navigate(`Level${item}`), 200)
+          animateButton();
+          setTimeout(() => navigation.navigate(`Level${item}`), 200);
         }}
       >
         <Animated.View
@@ -34,26 +34,26 @@ export default function GameScreen() {
                 {
                   scale: animatedValue.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [1, 0.9],
+                    outputRange: [1, 0.95],
                   }),
                 },
               ],
             },
           ]}
         >
-          <LinearGradient colors={["#FF9A8B", "#FF6A88", "#FF99AC"]} style={styles.gradient}>
+          <LinearGradient colors={["#6a82fb", "#fc5c7d"]} style={styles.gradient}>
             <Text style={styles.buttonText}>{item}</Text>
           </LinearGradient>
         </Animated.View>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
-  const numColumns = 2 // Define the number of columns per row
+  const numColumns = 2; // Define the number of columns per row
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={["#8EC5FC", "#E0C3FC"]} style={styles.background}>
+      <LinearGradient colors={["#89CFF0", "#A3D8F4"]} style={styles.background}>
         <Text style={styles.title}>Choose a Level</Text>
 
         <FlatList
@@ -66,11 +66,11 @@ export default function GameScreen() {
         />
       </LinearGradient>
     </View>
-  )
+  );
 }
 
-const { width } = Dimensions.get("window")
-const buttonSize = (width - 60) / 2
+const { width } = Dimensions.get("window");
+const buttonSize = (width - 60) / 2;
 
 const styles = StyleSheet.create({
   container: {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     marginBottom: 20,
     textAlign: "center",
-    textShadowColor: "rgba(0, 0, 0, 0.2)",
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
   },
@@ -97,22 +97,23 @@ const styles = StyleSheet.create({
   button: {
     width: buttonSize,
     height: buttonSize,
-    borderRadius: 20,
+    borderRadius: 25,
     overflow: "hidden",
     elevation: 5,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   gradient: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 25,
   },
   buttonText: {
     color: "white",
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
     textShadowColor: "rgba(0, 0, 0, 0.2)",
     textShadowOffset: { width: 1, height: 1 },
@@ -124,5 +125,4 @@ const styles = StyleSheet.create({
   columnWrapper: {
     justifyContent: "space-between",
   },
-})
-
+});
