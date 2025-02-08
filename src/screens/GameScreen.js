@@ -6,7 +6,7 @@ export default function GameScreen() {
   const navigation = useNavigation();
 
   // Create an array of 100 levels
-  const levels = Array.from({ length: 100 }, (_, index) => index + 1);
+  const levels = Array.from({ length: 10 }, (_, index) => index + 1);
 
   const renderItem = ({ item }) => {
     const animatedValue = new Animated.Value(0);

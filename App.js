@@ -10,6 +10,7 @@ import LiveNewsScreen from "./src/screens/LiveNewsScreen";
 import LevelScreen from "./src/screens/LevelScreen"; // Add this new screen
 import MCQScreen from "./src/screens/MCQScreen"; // Import MCQ Screen
 import { PointsProvider } from "./src/context/PointsContext"; // Import PointsProvider
+import BlogDetailScreen from "./src/screens/BlogDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -23,7 +24,8 @@ export default function App() {
           <Stack.Screen name="Game" component={GameScreen} />
           <Stack.Screen name="Voice" component={VoiceScreen} />
           <Stack.Screen name="LiveNews" component={LiveNewsScreen} />
-          {Array.from({ length: 100 }).map((_, index) => (
+          <Stack.Screen name="BlogDetail" component={BlogDetailScreen} />
+          {Array.from({ length: 10 }).map((_, index) => (
             <Stack.Screen
               key={`level-${index + 1}`}
               name={`Level${index + 1}`}x
