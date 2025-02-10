@@ -1,14 +1,19 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { usePoints } from "../context/PointsContext"; // Import usePoints
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const { points } = usePoints(); // Get points from context
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to HealthQuest</Text>
+
+      {/* Display total points */}
+      <Text style={styles.points}>Total Points: {points}</Text>
 
       <View style={styles.buttonContainer}>
         {/* Profile Button */}
@@ -32,7 +37,7 @@ export default function HomeScreen() {
         {/* Live News Button */}
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("LiveNews")}>
           <Ionicons name="newspaper-outline" size={40} color="white" />
-          <Text style={styles.buttonText}>Live News</Text>
+          <Text style={styles.buttonText}>General</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -40,7 +45,7 @@ export default function HomeScreen() {
 }
 
 // Styles
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -52,6 +57,12 @@ const styles = {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#007bff",
+  },
+  points: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 30,
     color: "#007bff",
   },
   buttonContainer: {
@@ -73,4 +84,4 @@ const styles = {
     fontSize: 14,
     marginTop: 5,
   },
-};
+});
